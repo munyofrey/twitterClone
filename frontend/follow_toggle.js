@@ -25,7 +25,7 @@ FollowToggle.prototype.handleClick = function () {
     $.ajax(
       {
       method: method,
-      url: `/users/${follow.userId}/followertgert`,
+      url: `/users/${follow.userId}/follow`,
       dataType: "json",
       success: (message) =>{
         follow.switchState();
