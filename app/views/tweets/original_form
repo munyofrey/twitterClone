@@ -1,11 +1,11 @@
 <h2>New Tweet!</h2>
-<form  data-tweet-ul="#feed" class="tweet-compose" action="/tweets" method="POST">
+<form action="/tweets" method="POST">
   <input
       type="hidden"
       name="authenticity_token"
       value="<%= form_authenticity_token %>">
 
-  <label class='text-area'>
+  <label>
     Content
     <textarea name="tweet[content]"></textarea>
   </label>
