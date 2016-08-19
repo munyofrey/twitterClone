@@ -49,9 +49,10 @@ class User < ActiveRecord::Base
       .order("tweets.created_at DESC")
       .uniq
 
-    # TODO: How can we use limit/max_created_at here??
-
-    @tweets
+    if max_created_at
+      @tweets = @tweets.where("tweets.created_at < :date", date: max_created_at)
+    end
+    @tweets.limit(limit)
   end
 
   def follows?(user)
