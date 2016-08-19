@@ -1,6 +1,10 @@
+// let _=require('underscore');
+
 function InfiniteTweets($div){
   this.maxCreated = null;
   this.$div = $div;
+  this.$script = $('.script-infinite-tweets');
+  this.fetchTweets();
   this.$div.find('.fetch-more').click(this.fetchTweets.bind(this));
   this.$ul = this.$div.find('ul#feed');
 }
@@ -15,7 +19,6 @@ InfiniteTweets.prototype.fetchTweets = function(e){
     dataType: 'json',
     data: data,
     success: (message) =>{
-      console.log(message);
       this.render(message);
     }
 
@@ -33,6 +36,17 @@ InfiniteTweets.prototype.render = function(message){
     this.$div.find('.fetch-more').remove();
     this.$div.append($('<h3>').text('No more tweets to fetch!'));
   }
+};
+
+InfiniteTweets.prototype.renderNew = function(message2){
+  let templateCode = this.$script.html();
+  let templateFn = _.template(templateCode);
+  console.log(templateFn);
+  let renderedContent = templateFn({
+    tweets: message2
+  });
+
+  this.$div.append(renderedContent);
 };
 
 module.exports = InfiniteTweets;
